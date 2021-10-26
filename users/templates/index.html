@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users with Templates</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>All the Users</h1>
+        <div class="allUsers" >
+            <table name="userDisplay">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for one_user in all_the_users %}
+                    <tr>
+                        <td>{{one_user.id}}</td>
+                        <td>{{one_user.first_name}} {{one_user.last_name}}</td>
+                        <td>{{one_user.email}}</td>
+                        <td>{{one_user.age}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h1>Add User</h1>
+        <div class="addUser">
+            <form action="/createUser" method="POST">
+                {% csrf_token %}
+                <label>First Name: <input type="text" name="first_name"></label> 
+                <label>Last Name: <input type="text" name="last_name"></label>
+                <label>Email: <input type="email" name="email"></label>
+                <label>Age: <input type="number" name="age"></label>
+                <input class="addbtn" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
